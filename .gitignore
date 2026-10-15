@@ -1,0 +1,12 @@
+.venv/
+data/
+work/
+__pycache__/
+.pytest_cache/
+*.pyc
+results/models/
+*.keras
+*.joblib
+deliverables/
+.env
+node_modules
