@@ -28,6 +28,7 @@ for name in (
     "pyproject.toml",
     "requirements-dev.txt",
     ".gitignore",
+    ".gitattributes",
     "requirements.txt",
     "requirements-gpu.txt",
     "environment-lock.txt",

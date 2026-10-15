@@ -117,7 +117,7 @@ def audit_dataset(data_dir=DATA_DIR, cache_dir=CACHE_DIR):
     result = dict(source_signature=signature, tracks=rows)
     write_json(manifest_path, result)
     with (cache_dir / "inventory.csv").open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return result
