@@ -17,3 +17,7 @@ Extract the supplied submission ZIP to a directory of your choice. It preserves 
 ## Individual contributions
 
 Record only work actually completed by each person in `docs/CONTRIBUTIONS.md`. Both people should understand data leakage, mel features, model comparisons, evaluation, and the inference code. Do not represent an AI-generated commit as a student's individual contribution.
+
+## Preview limitation
+
+The browser permission check denied opening the local app during this implementation session. Streamlit's local application tests exercise loading, uploads, prediction display and error handling, but they do not replace visual browser review. Before the live review, inspect the app yourself and record a short demonstration if required. The slides and PDFs are rendered and visually inspected separately.

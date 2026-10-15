@@ -12,6 +12,10 @@ scripts/run.sh app
 
 Open the local address printed by Streamlit. Upload a WAV or FLAC file with at least two seconds of music. The app processes up to the first 30 seconds. Neural training and app inference require the NVIDIA GPU.
 
+## Measured results
+
+The selected mel CNN achieves 64% accuracy on central two-second test windows. Averaging five windows per recording achieves 70% accuracy and 0.706 macro-F1 on the 100 held-out test recordings. These are separate evaluation protocols. See `docs/RESULTS.md` and the auditable prediction records for all ten experiments.
+
 ## Reproduce in a fresh environment
 
 Use Linux, Python 3.12, a working NVIDIA driver, and enough storage for the dataset, TensorFlow, CUDA dependencies, caches, and trained models.

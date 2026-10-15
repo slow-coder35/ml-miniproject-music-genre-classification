@@ -1,0 +1,30 @@
+{
+  "first_classical": {
+    "track": "data/genres_original/classical/classical.00011.flac",
+    "true_genre": "classical",
+    "genre": "classical",
+    "model_score": 0.9977224469184875,
+    "model": "cnn_mel_lr0003"
+  },
+  "first_rock": {
+    "track": "data/genres_original/rock/rock.00003.flac",
+    "true_genre": "rock",
+    "genre": "country",
+    "model_score": 0.4165314733982086,
+    "model": "cnn_mel_lr0003"
+  },
+  "first_jazz": {
+    "track": "data/genres_original/jazz/jazz.00014.flac",
+    "true_genre": "jazz",
+    "genre": "classical",
+    "model_score": 0.8087388277053833,
+    "model": "cnn_mel_lr0003"
+  },
+  "first_error": {
+    "track": "data/genres_original/blues/blues.00000.flac",
+    "true_genre": "blues",
+    "genre": "rock",
+    "model_score": 0.3064148426055908,
+    "model": "cnn_mel_lr0003"
+  }
+}

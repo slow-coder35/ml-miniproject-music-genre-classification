@@ -1,0 +1,66 @@
+{
+  "experiment": "knn_raw",
+  "feature_signature": "0ff69f7989e3e7f190f7316598d305601e93df382e6bfb1394e584e7cead750a",
+  "feature_spec": {
+    "center": true,
+    "db_amin": 1e-10,
+    "db_ref": 1.0,
+    "db_top": 80.0,
+    "evaluation_window": "center",
+    "hop_length": 256,
+    "mel_normalization": "training_global_zscore",
+    "mono": true,
+    "n_fft": 512,
+    "n_mels": 64,
+    "pad_mode": "constant",
+    "power": 2.0,
+    "raw_normalization": "per_window_zscore",
+    "sample_rate": 22050,
+    "train_windows": 4,
+    "version": 2,
+    "window_samples": 44100
+  },
+  "fit_seconds": 8.612301513000148,
+  "genres": [
+    "blues",
+    "classical",
+    "country",
+    "disco",
+    "hiphop",
+    "jazz",
+    "metal",
+    "pop",
+    "reggae",
+    "rock"
+  ],
+  "gpu_devices": [],
+  "input": "raw",
+  "metrics": {
+    "train": {
+      "accuracy": 1.0,
+      "count": 3188,
+      "macro_f1": 1.0
+    },
+    "val": {
+      "accuracy": 0.13,
+      "count": 100,
+      "macro_f1": 0.07415942028985507
+    }
+  },
+  "model": "knn",
+  "model_bytes": 3946263,
+  "model_path": "results/models/knn_raw.joblib",
+  "python": "3.12.3",
+  "settings": {
+    "C": 1,
+    "batch_size": 32,
+    "dropout": 0.25,
+    "epochs": 50,
+    "gamma": "scale",
+    "kernel": "rbf",
+    "learning_rate": 0.001,
+    "neighbors": 10,
+    "pca_components": 15,
+    "seed": 42
+  }
+}

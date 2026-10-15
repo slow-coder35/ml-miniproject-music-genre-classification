@@ -1,7 +1,16 @@
 {
   "course": "UE24CS352A - Machine Learning",
   "section": "",
-  "members": [{"name":"", "student_id":""}, {"name":"", "student_id":""}],
+  "members": [
+    {
+      "name": "Prajwal Deshpande",
+      "student_id": "PES1UG24CS589"
+    },
+    {
+      "name": "Prajwal Ambanna",
+      "student_id": "PES1UG24CS588"
+    }
+  ],
   "repository_url": "",
   "faculty_github_usernames": []
 }

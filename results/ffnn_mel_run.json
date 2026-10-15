@@ -1,0 +1,66 @@
+{
+  "experiment": "ffnn_mel",
+  "feature_signature": "0ff69f7989e3e7f190f7316598d305601e93df382e6bfb1394e584e7cead750a",
+  "feature_spec": {
+    "center": true,
+    "db_amin": 1e-10,
+    "db_ref": 1.0,
+    "db_top": 80.0,
+    "evaluation_window": "center",
+    "hop_length": 256,
+    "mel_normalization": "training_global_zscore",
+    "mono": true,
+    "n_fft": 512,
+    "n_mels": 64,
+    "pad_mode": "constant",
+    "power": 2.0,
+    "raw_normalization": "per_window_zscore",
+    "sample_rate": 22050,
+    "train_windows": 4,
+    "version": 2,
+    "window_samples": 44100
+  },
+  "fit_seconds": 32.0365887009998,
+  "genres": [
+    "blues",
+    "classical",
+    "country",
+    "disco",
+    "hiphop",
+    "jazz",
+    "metal",
+    "pop",
+    "reggae",
+    "rock"
+  ],
+  "gpu_devices": [
+    "/physical_device:GPU:0"
+  ],
+  "input": "mel",
+  "metrics": {
+    "train": {
+      "accuracy": 0.4617314930991217,
+      "count": 3188,
+      "macro_f1": 0.4360382996740597
+    },
+    "val": {
+      "accuracy": 0.44,
+      "count": 100,
+      "macro_f1": 0.42079315936901074
+    }
+  },
+  "model": "ffnn",
+  "model_bytes": 48181279,
+  "model_path": "results/models/ffnn_mel.keras",
+  "python": "3.12.3",
+  "settings": {
+    "batch_size": 32,
+    "best_epoch": 2,
+    "best_val_loss": 1.6082922220230103,
+    "dropout": 0.25,
+    "epochs": 50,
+    "epochs_run": 10,
+    "learning_rate": 0.001,
+    "seed": 42
+  }
+}

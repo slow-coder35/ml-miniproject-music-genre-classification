@@ -1,0 +1,55 @@
+{
+  "checks": [
+    "svm_mel: saved predictions reproduce all metrics",
+    "knn_mel: saved predictions reproduce all metrics",
+    "cnn_mel: saved predictions reproduce all metrics",
+    "ffnn_mel: saved predictions reproduce all metrics",
+    "svm_raw: saved predictions reproduce all metrics",
+    "knn_raw: saved predictions reproduce all metrics",
+    "ffnn_raw: saved predictions reproduce all metrics",
+    "cnn_raw: saved predictions reproduce all metrics",
+    "cnn_mel_lr0003: saved predictions reproduce all metrics",
+    "cnn_mel_dropout040: saved predictions reproduce all metrics",
+    "Independent model loads produce matching probabilities"
+  ],
+  "example": {
+    "genre": "classical",
+    "model": "cnn_mel_lr0003",
+    "model_score": 0.4651901125907898,
+    "scores": {
+      "blues": 0.01963285729289055,
+      "classical": 0.4651901125907898,
+      "country": 0.1488899290561676,
+      "disco": 0.09455101191997528,
+      "hiphop": 0.04531911760568619,
+      "jazz": 0.000960836187005043,
+      "metal": 0.001217560493387282,
+      "pop": 0.0005221129395067692,
+      "reggae": 0.1738015115261078,
+      "rock": 0.04991493001580238
+    },
+    "top_three": [
+      {
+        "genre": "classical",
+        "score": 0.4651901125907898
+      },
+      {
+        "genre": "reggae",
+        "score": 0.1738015115261078
+      },
+      {
+        "genre": "country",
+        "score": 0.1488899290561676
+      }
+    ],
+    "window_count": 5,
+    "window_starts_seconds": [
+      0.0,
+      7.0,
+      14.0,
+      21.0,
+      28.0
+    ]
+  },
+  "passed": true
+}

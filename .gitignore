@@ -10,3 +10,6 @@ results/models/
 deliverables/
 .env
 node_modules
+.agents/
+.claude/
+.chart-data-*/

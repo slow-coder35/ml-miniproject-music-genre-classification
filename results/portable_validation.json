@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "verified_file_count": 123,
+  "method": "Extracted ZIP into a separate directory; verified all file hashes; ran saved-model CLI without dataset caches in that directory; matched original probabilities.",
+  "prediction": {
+    "genre": "classical",
+    "model_score": 0.4651901125907898,
+    "top_three": [
+      {
+        "genre": "classical",
+        "score": 0.4651901125907898
+      },
+      {
+        "genre": "reggae",
+        "score": 0.1738015115261078
+      },
+      {
+        "genre": "country",
+        "score": 0.1488899290561676
+      }
+    ],
+    "scores": {
+      "blues": 0.01963285729289055,
+      "classical": 0.4651901125907898,
+      "country": 0.1488899290561676,
+      "disco": 0.09455101191997528,
+      "hiphop": 0.04531911760568619,
+      "jazz": 0.000960836187005043,
+      "metal": 0.001217560493387282,
+      "pop": 0.0005221129395067692,
+      "reggae": 0.1738015115261078,
+      "rock": 0.04991493001580238
+    },
+    "window_count": 5,
+    "window_starts_seconds": [
+      0.0,
+      7.0,
+      14.0,
+      21.0,
+      28.0
+    ],
+    "model": "cnn_mel_lr0003",
+    "source_duration_seconds": 30.013333333333332,
+    "analyzed_seconds": 30.0,
+    "sample_rate": 22050
+  }
+}

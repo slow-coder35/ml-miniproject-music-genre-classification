@@ -1,0 +1,34 @@
+{
+  "build_info": {
+    "cpu_compiler": "clang",
+    "cuda_compute_capabilities": [
+      "sm_60",
+      "sm_70",
+      "sm_80",
+      "sm_89",
+      "compute_90"
+    ],
+    "cuda_version": "12.5.1",
+    "cudnn_version": "9",
+    "is_cuda_build": true,
+    "is_rocm_build": false,
+    "is_tensorrt_build": false
+  },
+  "computation_device": "/job:localhost/replica:0/task:0/device:GPU:0",
+  "devices": [
+    "/physical_device:GPU:0"
+  ],
+  "gpu_details": [
+    {
+      "compute_capability": [
+        8,
+        9
+      ],
+      "device_name": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    }
+  ],
+  "gradient_device": "/job:localhost/replica:0/task:0/device:GPU:0",
+  "loss": 6.9733500480651855,
+  "passed": true,
+  "tensorflow": "2.21.0"
+}

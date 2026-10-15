@@ -2,9 +2,12 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
+process.env.RUNTIME_NODE_MODULES ??= '/home/bae/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
+try {
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const SKILL_DIR='/home/bae/.codex/plugins/cache/openai-primary-runtime/presentations/26.1013.11914/skills/presentations';
 const PYTHON='/home/bae/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3';
+const {applyPresentationChartFont}=await import(pathToFileURL(path.join(SKILL_DIR,'container_tools/artifact_tool_utils.mjs')).href);
 const read=async p=>JSON.parse(await fs.readFile(path.join(ROOT,p),'utf8'));
 const evaluation=await read('results/evaluation.json');
 const inventory=await read('data/cache/inventory.json');
@@ -19,9 +22,10 @@ const pct=x=>(100*x).toFixed(1)+'%';
 const usable=inventory.tracks.filter(t=>t.usable).length;
 const p=Presentation.create({slideSize:{width:1280,height:720}});
 const font='DejaVu Sans',ink='#17343E',teal='#007F8B',muted='#526975';
+p.theme.defaultFont=font;
 function text(slide,content,x,y,w,h,size=28,bold=false,color=ink){
  const t=slide.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});
- t.text=content;t.text.style={fontFamily:font,fontSize:size,bold,color};return t;
+ t.text=content;t.text.style={typeface:font,fontSize:size,bold,color};return t;
 }
 function slide(title,notes=''){
  const s=p.slides.add();s.background.fill='#F8FAF9';
@@ -34,7 +38,7 @@ function table(s,values,x,y,w,h,widths){
  t.borders.assign({fill:'#D5E3E5',width:1});
  for(let r=0;r<values.length;r++)for(let c=0;c<values[0].length;c++){
   const cell=t.getCell(r,c);cell.fill=r===0?ink:(r%2?'#FFFFFF':'#ECF3F3');
-  cell.text.style={fontFamily:font,fontSize:24,bold:r===0,color:r===0?'#FFFFFF':ink};
+  cell.text.style={typeface:font,fontSize:24,bold:r===0,color:r===0?'#FFFFFF':ink};
  }
  return t;
 }
@@ -43,7 +47,8 @@ async function image(s,relative,x,y,w,h){
  s.images.add({blob:b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),contentType:'image/png',alt:path.basename(relative),fit:'contain',position:{left:x,top:y,width:w,height:h}});
 }
 function chart(s,metric,title,x,y,w,h){
- const chart=s.charts.add('bar',{position:{left:x,top:y,width:w,height:h},title,titleTextStyle:{fontFamily:font,fontSize:25,bold:true,fill:ink},categories:['SVM','k-NN','FFNN','CNN'],series:['raw','mel'].map((kind,i)=>({name:kind==='raw'?'Raw waveform':'Log-mel',values:['svm','knn','ffnn','cnn'].map(m=>base.find(r=>r.model===m&&r.input===kind)[metric]),fill:i?'#007F8B':'#ED9459'})),hasLegend:true,barOptions:{direction:'column',grouping:'clustered'},legend:{textStyle:{fontFamily:font,fontSize:19}},xAxis:{textStyle:{fontFamily:font,fontSize:21}},yAxis:{numberFormatCode:'0%',minimumScale:0,maximumScale:1,textStyle:{fontFamily:font,fontSize:18}},dataLabels:{showValue:true,numberFormatCode:'0%',position:'outEnd',textStyle:{fontFamily:font,fontSize:17,fill:ink}},chartFill:'#F8FAF9'});
+ const chart=s.charts.add('bar',{position:{left:x,top:y,width:w,height:h},title,titleTextStyle:{fontSize:25,bold:true,fill:ink},categories:['SVM','k-NN','FFNN','CNN'],series:['raw','mel'].map((kind,i)=>({name:kind==='raw'?'Raw waveform':'Log-mel',values:['svm','knn','ffnn','cnn'].map(m=>Number(base.find(r=>r.model===m&&r.input===kind)[metric].toFixed(6))),fill:i?'#007F8B':'#ED9459'})),hasLegend:true,barOptions:{direction:'column',grouping:'clustered'},legend:{textStyle:{fontSize:19}},xAxis:{textStyle:{fontSize:21}},yAxis:{numberFormatCode:'0%',min:0,max:1,textStyle:{fontSize:18}},dataLabels:{showValue:true,numberFormatCode:'0%',position:'outEnd',textStyle:{fontSize:17,fill:ink}},chartFill:'#F8FAF9'});
+ applyPresentationChartFont(chart,{fontFamily:font});
  return chart;
 }
 const members=team.members.filter(m=>m.name).map(m=>`${m.name} (${m.student_id})`).join(' / ');
@@ -73,7 +78,7 @@ s=slide('Models and GPU training','Architectures extend the local starter code a
 table(s,[['Model','Main configuration'],['SVM','Scale, PCA(15), RBF kernel'],['k-NN','Scale, PCA(15), k=10, distance weighting'],['FFNN','Five hidden dense layers, ten-class softmax'],['CNN','Three convolution blocks, dense layers, softmax']],64,155,1152,320,[230,922]);
 text(s,'Adam 0.001, batch 32, up to 50 epochs',64,511,1120,50,29,true,teal);
 text(s,'Early stopping restores the best validation-loss weights.\nTwo additional mel-CNN trials vary learning rate or dropout.',64,578,1120,78,25);
-s=slide('Eight-model test comparison','All chart values are measured local results/results.csv. Main protocol: one central two-second window per held-out recording. Macro-F1 gives each genre equal weight. Published report values are not substituted.');
+s=slide('Eight-model test comparison','All chart values are measured local results/results.csv, rounded to six decimal places for Excel portability. Main protocol: one central two-second window per held-out recording. Macro-F1 gives each genre equal weight. Published report values are not substituted.');
 chart(s,'test_acc','Accuracy',64,154,550,370);
 chart(s,'test_macro_f1','Macro-F1',660,154,550,370);
 text(s,`Highest baseline test macro-F1: ${best.experiment} (${best.test_macro_f1.toFixed(3)})`,64,558,1145,58,29,true,teal);
@@ -97,12 +102,15 @@ for(const [i,sl] of p.slides.items.entries()){
 const candidatePath=path.join(staging,'candidate.pptx');
 await (await PresentationFile.exportPptx(p)).save(candidatePath);
 const {finalizePresentation}=await import(pathToFileURL(path.join(SKILL_DIR,'container_tools/artifact_tool_utils.mjs')).href);
-const finalPath=path.join(out,'project_presentation.pptx');
+let finalPath=path.join(out,'project_presentation.pptx');
+try { await fs.access(finalPath); finalPath=path.join(out,`project_presentation_${Date.now()}.pptx`); } catch {}
 await finalizePresentation({workspaceDir:ROOT,candidatePath,finalPath,pythonExecutable:PYTHON,
  integrityValidatorPath:path.join(SKILL_DIR,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(SKILL_DIR,'container_tools/inspect_presentation_layout_geometry.py'),
- layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit'],
+ layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit','--require-native-table-slide','2','--require-native-table-slide','3','--require-native-table-slide','5'],
  explicitTotalSlideCount:8,requiredNativeTableOwnerSlides:[2,3,5],requiredNativeChartOwnerSlides:[6],
  materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'design',families:[font]},
  verifyArtifactToolImport:true,receiptPath:path.join(staging,'validation.json')});
 console.log(finalPath);
+
+} catch(error) { console.error(error.stack ?? String(error)); process.exitCode=1; }

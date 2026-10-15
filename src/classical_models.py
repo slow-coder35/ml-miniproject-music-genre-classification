@@ -1,4 +1,5 @@
 """Specified sklearn pipelines for raw and mel features."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -23,9 +24,11 @@ def build_classical_model(name: str) -> Pipeline:
         classifier = KNeighborsClassifier(n_neighbors=10, weights="distance")
     else:
         raise ValueError(f"Unknown classical model: {name}")
-    return Pipeline([
-        ("flatten", FunctionTransformer(flatten_features)),
-        ("scaler", StandardScaler()),
-        ("pca", PCA(n_components=15, svd_solver="randomized", random_state=SEED)),
-        ("classifier", classifier),
-    ])
+    return Pipeline(
+        [
+            ("flatten", FunctionTransformer(flatten_features)),
+            ("scaler", StandardScaler()),
+            ("pca", PCA(n_components=15, svd_solver="randomized", random_state=SEED)),
+            ("classifier", classifier),
+        ]
+    )

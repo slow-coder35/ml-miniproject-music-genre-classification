@@ -1,0 +1,60 @@
+{
+  "feature_signature": "0ff69f7989e3e7f190f7316598d305601e93df382e6bfb1394e584e7cead750a",
+  "models": {
+    "cnn_mel": "6fd4178d9a3bc28c9162d3eeb6206ab00d8a265e60f3e3fb77630273012b63c3",
+    "cnn_mel_dropout040": "051d6d568a5a854076c08fb1aff437e9035477da5e74278ad833589f790d6042",
+    "cnn_mel_lr0003": "cefacb8f9f61a4c1d1a0853387ae65f72ba5da1945dbf93c3de27a5378d15b9c",
+    "cnn_raw": "570d906a11fa251077be59cb15b244a201bb2ce0aadb8a4128489335bbcedf38",
+    "ffnn_mel": "be89fe6bd85e252032ebc9dfa0df4d01098e064374e0d9b175d0384b3559a65c",
+    "ffnn_raw": "28b4d79a50222e5b1606ee2c8e113df20ab43d0bfff62bb9cbd47b784892186b",
+    "knn_mel": "b75c0ee2c4e9a18d1eace3925d983bd029439cc203bdb36e6dc6968a6f279a56",
+    "knn_raw": "629cdf083785b63f8a45691be9fbf4de3e60aec161a23b636278300448c77da9",
+    "svm_mel": "87c1121debcee9486c08b99b885303980f20cd3591b5bcdce0d2a8591c46f3e4",
+    "svm_raw": "c7d28fe270dbacc68727735a4ed4568bf68b8c0ee3c05fd8ce3443f942bb7a9d"
+  },
+  "selection": {
+    "criterion": "validation macro-F1, tie-break minimum validation loss",
+    "experiment": "cnn_mel_lr0003",
+    "feature_signature": "0ff69f7989e3e7f190f7316598d305601e93df382e6bfb1394e584e7cead750a",
+    "feature_spec": {
+      "center": true,
+      "db_amin": 1e-10,
+      "db_ref": 1.0,
+      "db_top": 80.0,
+      "evaluation_window": "center",
+      "hop_length": 256,
+      "mel_normalization": "training_global_zscore",
+      "mono": true,
+      "n_fft": 512,
+      "n_mels": 64,
+      "pad_mode": "constant",
+      "power": 2.0,
+      "raw_normalization": "per_window_zscore",
+      "sample_rate": 22050,
+      "train_windows": 4,
+      "version": 2,
+      "window_samples": 44100
+    },
+    "genres": [
+      "blues",
+      "classical",
+      "country",
+      "disco",
+      "hiphop",
+      "jazz",
+      "metal",
+      "pop",
+      "reggae",
+      "rock"
+    ],
+    "inference": {
+      "aggregation": "mean_softmax",
+      "maximum_seconds": 30,
+      "window_count": 5
+    },
+    "mel_mean": -24.09721588332984,
+    "mel_std": 16.74335245155822,
+    "model_path": "results/models/cnn_mel_lr0003.keras",
+    "validation_macro_f1": 0.646706918812182
+  }
+}
